@@ -206,31 +206,34 @@
         <!-- Your search box content remains unchanged -->
     </div>
 
-    <!-- SIGNUP FORM -->
-    <body style="margin: 0; padding: 0; height: 100vh; position: relative;">
-     
-    <div class="signup-container" style="text-align: center; position: absolute; bottom: 11%; left: 50%; transform: translateX(-50%);">
-        <h2 class="signup-title">Sign Up</h2>
-        <div class="input-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username">
-        </div>
+     <!-- SIGNUP FORM -->
+     <div class="signup-container" style="text-align: center; position: absolute; bottom: 11%; left: 50%; transform: translateX(-50%);">
+      <h2 class="signup-title">Sign Up</h2>
 
-        <div class="input-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email">
-        </div>
+      <!-- Update form method and action -->
+      <form method="post" action="register.php">
+          <div class="input-group">
+              <label for="username">Username:</label>
+              <input type="text" id="username" name="username" placeholder="Enter your username" required>
+          </div>
 
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-        </div>
+          <div class="input-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          </div>
 
-        <button class="signup-btn" type="button">Sign Up</button>
+          <div class="input-group">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          </div>
 
-        <p class="signup-link">Already have an account? <a href="login.html">Login</a></p>
-    </div>
-  </body>
+          <!-- Update button type to submit -->
+          <button class="signup-btn" type="submit">Sign Up</button>
+      </form>
+
+      <p class="signup-link">Already have an account? <a href="login.html">Login</a></p>
+  </div>
+</body>
 </body>
 
 </html>
