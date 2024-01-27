@@ -233,7 +233,7 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
           </div>
 
           <figure class="hero-banner img-holder" style="--width: 700; --height: 700;">
-            <img src="./assets/images/hero-banner.png" width="700" height="700" alt="hero banner" class="w-100">
+            <img src="../assets/images/hero-banner.png" width="700" height="700" alt="hero banner" class="w-100">
           </figure>
 
         </div>
