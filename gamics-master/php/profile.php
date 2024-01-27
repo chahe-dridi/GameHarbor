@@ -119,13 +119,13 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
     <div class="header-bottom skewBg" data-header>
       <div class="container">
 
-        <a href="#" class="logo">GameHarbor</a>
+        <a href="client.php" class="logo">GameHarbor</a>
 
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
 
             <li class="navbar-item">
-              <a href="#home" class="navbar-link skewBg" data-nav-link>Home</a>
+              <a href="client.php" class="navbar-link skewBg" data-nav-link>Home</a>
             </li>
 
             <li class="navbar-item">
