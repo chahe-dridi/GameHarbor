@@ -211,7 +211,7 @@
       <h2 class="signup-title">Sign Up</h2>
 
       <!-- Update form method and action -->
-      <form method="post" action="register.php">
+      <form method="post" action="php/register.php">
           <div class="input-group">
               <label for="username">Username:</label>
               <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -221,6 +221,31 @@
               <label for="email">Email:</label>
               <input type="email" id="email" name="email" placeholder="Enter your email" required>
           </div>
+
+          <div class="input-group">
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="" disabled selected>Select your country</option>
+            </select>
+        </div>
+    
+        <script>
+            // Fetch countries from an API (example: Restcountries API)
+            fetch('https://restcountries.com/v2/all')
+                .then(response => response.json())
+                .then(data => {
+                    const countryDropdown = document.getElementById('country');
+    
+                    // Populate the dropdown with country names
+                    data.forEach(country => {
+                        const option = document.createElement('option');
+                        option.value = country.name;
+                        option.textContent = country.name;
+                        countryDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching countries:', error));
+        </script>
 
           <div class="input-group">
               <label for="password">Password:</label>

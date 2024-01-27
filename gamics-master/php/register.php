@@ -5,11 +5,12 @@ include 'connect.php';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    $username = mysqli_real_escape_string($conn, $_POST["username"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    // You may want to add more validation and sanitization here
 
-    // Validate the data (you may add more validation as needed)
+    // Validate the data
     if (empty($username) || empty($email) || empty($password)) {
         echo "All fields are required.";
     } else {
@@ -17,16 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert user data into the 'clients' table
-        $sql = "INSERT INTO clients (client_name, wallet_id, registration_date) VALUES ('$username', '$email', NOW())";
+        $sql = "INSERT INTO clients (client_name, email, password, registration_date) VALUES ('$username', '$email', '$hashedPassword', NOW())";
 
         if ($conn->query($sql) === TRUE) {
-            echo "User registered successfully!";
+           // Redirect to the home page
+           header("Location: ../login.html");
+            exit(); // Make sure to exit to prevent further script execution
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
 }
 
-// Close the database connection (important to avoid resource leaks)
+// Close the database connection
 $conn->close();
 ?>

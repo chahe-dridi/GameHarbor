@@ -225,25 +225,29 @@
 
   </div>
 
-<body style="margin: 0; padding: 0; height: 100vh; position: relative;">
+  <body style="margin: 0; padding: 0; height: 100vh; position: relative;">
 
     <div class="login-container" style="text-align: center; position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);">
         <h2 class="login-title">Login</h2>
-        <div class="input-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username">
-        </div>
 
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-        </div>
+        <form method="post" action="php/login.php">
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your Email">
+            </div>
 
-        <button class="login-btn" type="button">Login</button>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+
+            <button class="login-btn" type="submit">Login</button>
+        </form>
 
         <p class="login-link">Don't have an account? <a href="register.html">Sign up</a></p>
     </div>
 
+    <!-- Add your scripts or other body content here -->
 </body>
 </body>
 
