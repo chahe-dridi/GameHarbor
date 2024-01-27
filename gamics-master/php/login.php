@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['email'] = $email;
 
                 // Redirect to a secure page or perform other actions
-                header("Location: client.html");
+                header("Location: client.php");
                 exit();
             } else {
                 echo "Invalid password.";
