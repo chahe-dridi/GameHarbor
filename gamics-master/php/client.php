@@ -1,5 +1,6 @@
 <?php
 // Start the session
+include 'connect.php';
 session_start();
 
 // Check if the user is not logged in, redirect to the login page
@@ -8,11 +9,18 @@ if (!isset($_SESSION['client_id'])) {
     exit();
 }
 
-// Include the database connection file if needed
-// include 'connect.php';
+$sql = "SELECT * FROM games";
+$result = $conn->query($sql);
 
-// Your other PHP logic...
+// Check if there are any games
+if ($result->num_rows > 0) {
+    $games = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $games = [];
+}
 
+// Close the database connection
+$conn->close();
 ?>
 
 
@@ -209,7 +217,7 @@ if (!isset($_SESSION['client_id'])) {
       -->
 
       <section class="section hero" id="home" aria-label="home"
-        style="background-image: url('./assets/images/hero-bg.jpg')">
+        style="background-image: url('../assets/images/hero-bg.jpg')">
         <div class="container">
 
           <div class="hero-content">
@@ -554,142 +562,34 @@ if (!isset($_SESSION['client_id'])) {
         - #SHOP
       -->
 
-      <section class="section shop" id="shop" aria-label="shop"
-        style="background-image: url('./assets/images/shop-bg.jpg')">
-        <div class="container">
-
-          <h2 class="h2 section-title">
-            Gaming Product <span class="span">Corner</span>
-          </h2>
-
-          <p class="section-text">
-            Gain certain points to unlock exclusive rewards and elevate your gaming experience on GAME HARBOR.
-          </p>
-
-          <ul class="has-scrollbar">
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="../assets/images/shop-img-1.jpg" width="300" height="260" loading="lazy"
-                    alt="Women Black T-Shirt" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">t-shirt</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Women Black T-Shirt</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">290000</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="../assets/images/shop-img-2.jpg" width="300" height="260" loading="lazy"
-                    alt="Gears 5 Xbox Controller" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">x-box</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Gears 5 Xbox Controller</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">290000</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="../assets/images/shop-img-3.jpg" width="300" height="260" loading="lazy"
-                    alt="GeForce RTX 2070" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">Graphics</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">GeForce RTX 2070</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">290000</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
-                  <img src="../assets/images/shop-img-4.jpg" width="300" height="260" loading="lazy"
-                    alt="Virtual Reality Smiled" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <a href="#" class="card-badge skewBg">VR-Box</a>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Virtual Reality Smiled</a>
-                  </h3>
-
-                  <div class="card-wrapper">
-                    <p class="card-price">290000</p>
-
-                    <button class="card-btn">
-                      <ion-icon name="basket"></ion-icon>
-                    </button>
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
+      <section class="section shop" id="shop" aria-label="shop" style="background-image: url('../assets/images/shop-bg.jpg')">
+    <div class="container">
+        <h2 class="h2 section-title">Gaming Product <span class="span">Corner</span></h2>
+        <p class="section-text">Gain certain points to unlock exclusive rewards and elevate your gaming experience on GAME HARBOR.</p>
+        <ul class="has-scrollbar">
+            <?php foreach ($games as $game): ?>
+                <li class="scrollbar-item">
+                    <div class="shop-card">
+                        <figure class="card-banner img-holder" style="--width: 300; --height: 260;">
+                            <!-- Concatenate the base path with the game's image name -->
+                            <img src="../assets/images/games/<?= $game['picture'] ?>" width="300" height="260" loading="lazy" alt="<?= $game['game_name'] ?>" class="img-cover">
+                        </figure>
+                        <div class="card-content">
+                            <a href="#" class="card-badge skewBg"><?= $game['genre'] ?></a>
+                            <h3 class="h3"><a href="#" class="card-title"><?= $game['game_name'] ?></a></h3>
+                            <div class="card-wrapper">
+                                <p class="card-price"><?= $game['price'] ?></p>
+                                <button class="card-btn">
+                                    <ion-icon name="basket"></ion-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</section>
 
 
 

@@ -213,7 +213,7 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
       -->
 
       <section class="section hero" id="home" aria-label="home"
-        style="background-image: url('./assets/images/hero-bg.jpg')">
+        style="background-image: url('../assets/images/hero-bg.jpg')">
         <div class="container">
 
           <div class="hero-content">
