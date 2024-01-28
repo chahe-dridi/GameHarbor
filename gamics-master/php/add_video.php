@@ -107,13 +107,13 @@ if (!isset($_SESSION['agent_id'])) {
     <div class="header-bottom skewBg" data-header>
       <div class="container">
 
-        <a href="client.php" class="logo">GameHarbor</a>
+        <a href="agent.php" class="logo">GameHarbor</a>
 
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
          
           <li class="navbar-item">
-                 <a href="add_video.php" class="navbar-link skewBg" data-nav-link>add videos</a>
+                 <a href="agent.php" class="navbar-link skewBg" data-nav-link>agent</a>
           </li>
 
           <li class="navbar-item">
@@ -285,7 +285,7 @@ if (!isset($_SESSION['agent_id'])) {
         <div class="container">
 
           <h2 class="h2 section-title">
-            Latest videos & <span class="span">Articles</span>
+            add your videos & <span class="span">Articles</span>
           </h2>
 
           <p class="section-text">
@@ -296,62 +296,25 @@ Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valu
           <ul class="blog-list">
 
          
+          <form method="post" action="add_v.php" enctype="multipart/form-data">
+    <div class="input-group">
+        <label for="name_video">Video Name:</label>
+        <input type="name_video" id="name_video" name="name_video" placeholder="Enter your Video Name" required>
+    </div>
 
+    <div class="input-group">
+        <label for="coins">Coins:</label>
+        <input type="number" id="coins" name="coins" placeholder="Enter your coins" required>
+    </div>
 
+    <div class="input-group">
+        <label for="video_file">Choose Video:</label>
+        <input type="file" id="video_file" name="video_file" accept="video/*" required>
+    </div>
 
-            <?php
-
-            // Retrieve the agent ID from the session
-$agentId = $_SESSION['agent_id'];
-$agentName = $_SESSION['agent_name'];
-
-
-// Query to retrieve videos for the logged-in agent
-$sql = "SELECT id, name_video, coins FROM videos WHERE agent_id = '$agentId'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $videoId = $row['id'];
-        $videoName = $row['name_video'];
-        $videoCoins = $row['coins'];
-        $videoUrl = '../assets/videos/' . $videoName; // Assuming the name in the database includes the extension
-
-        // Display video in the specified <form action=""></form>at
-        echo '<li>';
-        echo '<div class="blog-card">';
-        echo '<figure class="card-banner video-holder" style="--width: 400; --height: 290;">';
-        echo '<video controls width="400" height="290" alt="' . $videoName . '" class="video-cover">';
-        echo '<source src="' . $videoUrl . '" type="video/mp4">';
-        echo 'Your browser does not support the video tag.';
-        echo '</video>';
-        echo '</figure>';
-        echo '<div class="card-content">';
-        echo '<ul class="card-meta-list">';
-        echo '<li class="card-meta-item">';
-        echo '<ion-icon name="person-outline"></ion-icon>';
-        echo '<a href="#" class="item-text">Agent</a>';
-        echo '</li>';
-        echo '<li class="card-meta-item">';
-        echo '<ion-icon name="calendar-outline"></ion-icon>';
-        echo '<time datetime="2024-01-28" class="item-text">January 28, 2024</time>';
-        echo '</li>';
-        echo '</ul>';
-        echo '<h3><a href="#" class="card-title">' . $agentName . '</a></h3>';
-         
-        echo '<a href="#" class="card-link">';
-        echo '<span class="span"> Price </span>';
-        echo '<span class="span">'. $videoCoins .'</span>';
-        echo '<ion-icon name="caret-forward"></ion-icon>';
-        echo '</a>';
-        echo '</div>';
-        echo '</div>';
-        echo '</li>';
-    }
-} else {
-    echo 'No videos found for this agent.';
-} 
-?>
+    <!-- Update button type to submit -->
+    <button class="signup-btn" type="submit">Add Video</button>
+</form>
 
 
 
