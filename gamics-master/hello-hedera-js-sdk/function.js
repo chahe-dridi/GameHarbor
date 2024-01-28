@@ -90,4 +90,6 @@ const {
     );
   }
   environmentSetup();
+  module.exports = { environmentSetup };
+
   

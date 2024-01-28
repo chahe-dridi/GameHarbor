@@ -40,30 +40,3 @@ let associateAliceRx = await associateAliceTxSubmit.getReceipt(client);
 
 //LOG THE TRANSACTION STATUS
 console.log(`- Token association with Alice's account: ${associateAliceRx.status} \n`);
-//BALANCE CHECK
-var balanceCheckTx = await new AccountBalanceQuery().setAccountId(treasuryId).execute(client);
-console.log(`- Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
-var balanceCheckTx = await new AccountBalanceQuery().setAccountId(aliceId).execute(client);
-console.log(`- Alice's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
-
-// TRANSFER STABLECOIN FROM TREASURY TO ALICE
-let tokenTransferTx = await new TransferTransaction()
-	.addTokenTransfer(tokenId, treasuryId, -5)
-	.addTokenTransfer(tokenId, aliceId, 5)
-	.freezeWith(client)
-	.sign(treasuryKey);
-
-//SUBMIT THE TRANSACTION
-let tokenTransferSubmit = await tokenTransferTx.execute(client);
-
-//GET THE RECEIPT OF THE TRANSACTION
-let tokenTransferRx = await tokenTransferSubmit.getReceipt(client);
-
-//LOG THE TRANSACTION STATUS
-console.log(`\n- Stablecoin transfer from Treasury to Alice: ${tokenTransferRx.status} \n`);
-
-// BALANCE CHECK
-var balanceCheckTx = await new AccountBalanceQuery().setAccountId(treasuryId).execute(client);
-console.log(`- Treasury balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);
-var balanceCheckTx = await new AccountBalanceQuery().setAccountId(aliceId).execute(client);
-console.log(`- Alice's balance: ${balanceCheckTx.tokens._map.get(tokenId.toString())} units of token ID ${tokenId}`);

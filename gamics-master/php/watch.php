@@ -347,7 +347,7 @@ if ($result->num_rows > 0) {
     echo '</ul>';
      
     echo '<a href="#" class="card-link">';
-    echo '<span class="span"> Price </span>';
+    echo '<span class="span"> Reward </span>';
     echo '<span class="span">' . $videoCoins . '</span>';
     echo '<ion-icon name="caret-forward"></ion-icon>';
     echo '</a>';

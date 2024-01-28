@@ -1,6 +1,9 @@
 <?php
 // Include the database connection file
 include 'connect.php';
+$jsonData = file_get_contents('output.json');
+$data = json_decode($jsonData, true);
+$accountid = $data['accountid'];
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert user data into the 'clients' table
-        $sql = "INSERT INTO clients (client_name, email, password, registration_date) VALUES ('$username', '$email', '$hashedPassword', NOW())";
+        $sql = "INSERT INTO clients (client_name, wallet_id,email, password, registration_date) VALUES ('$username','$accountid' ,'$email', '$hashedPassword', NOW())";
 
         if ($conn->query($sql) === TRUE) {
            // Redirect to the home page
