@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 28 jan. 2024 à 06:11
+-- Généré le : dim. 28 jan. 2024 à 07:24
 -- Version du serveur : 10.4.25-MariaDB
 -- Version de PHP : 8.1.10
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `password`, `email`) VALUES
+(1, 'admin', '$2y$10$XLgiJ4ZRFk3tZhvTU/4YPeqsmVWEwM6W.VZakVicpvTv4.kLD3usa', 'a@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -82,7 +89,8 @@ CREATE TABLE `games` (
 INSERT INTO `games` (`game_id`, `game_name`, `description`, `genre`, `price`, `picture`, `id_admin`) VALUES
 (1, 'valorant', 'shooting game', 'fps', 2900, 'shop-img-1.jpg', NULL),
 (2, 'gta v', '', 'action/adventure', 3000, 'shop-img-3.jpg', NULL),
-(3, 'rainbow six seige', 'e', 'fps', 3100, 'shop-img-2.jpg', NULL);
+(3, 'rainbow six seige', 'e', 'fps', 3100, 'shop-img-2.jpg', NULL),
+(15, 'cs', 'eza', 'fps', 1234, 'shop-img-5.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +201,7 @@ ALTER TABLE `wallets`
 -- AUTO_INCREMENT pour la table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `clients`
@@ -205,7 +213,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT pour la table `games`
 --
 ALTER TABLE `games`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `publicity_agents`
