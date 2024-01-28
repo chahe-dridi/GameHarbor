@@ -6,11 +6,15 @@ include 'connect.php';
 session_start();
 
 // Check if the user is not logged in, redirect to the login page
-if (!isset($_SESSION['client_id'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['agent_id'])) {
+    header("Location: login_agent.php");
     exit();
 }
- ?>
+
+
+ 
+?>
+
 
 
 <!DOCTYPE html>
@@ -107,34 +111,11 @@ if (!isset($_SESSION['client_id'])) {
 
         <nav class="navbar" data-navbar>
           <ul class="navbar-list">
-
-            <li class="navbar-item">
-              <a href="client.php" class="navbar-link skewBg" data-nav-link>Home</a>
+         
+          <li class="navbar-item">
+                 <a href="logout.php" class="navbar-link skewBg" data-nav-link>Log out</a>
             </li>
-
-            <li class="navbar-item">
-              <a href="client.php#live" class="navbar-link skewBg" data-nav-link>Live</a>
-            </li>
-
-            <li class="navbar-item">
-              <a href="client.php#features" class="navbar-link skewBg" data-nav-link>Features</a>
-            </li>
-
-            <li class="navbar-item">
-              <a href="client.php#shop" class="navbar-link skewBg" data-nav-link>Shop</a>
-            </li>
-
-            <li class="navbar-item">
-              <a href="client.php#blog" class="navbar-link skewBg" data-nav-link>Blog</a>
-            </li>
-
-            <li class="navbar-item">
-              <a href="client.php#contact" class="navbar-link skewBg" data-nav-link>Contact</a>
-            </li>
-
-            <li class="navbar-item">
-              <a href="profile.php" class="navbar-link skewBg" data-nav-link>Profile</a>
-            </li>
+          
             
           </ul>
         </nav>
@@ -241,7 +222,7 @@ if (!isset($_SESSION['client_id'])) {
 
 
       <section class="account-balance-section">
-     
+    
     <div id="account-balance"></div>
  
 
@@ -307,58 +288,67 @@ if (!isset($_SESSION['client_id'])) {
             
 Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valuable points as you watch, and enhance your gaming experience with exciting benefits.
           </p>
-          
-          <ul class="blog-list">
-          <?php
 
-// Query to retrieve all videos from different agents
-$sql = "SELECT v.id, v.name_video, v.coins, a.agent_name
-        FROM videos v
-        JOIN publicity_agents a ON v.agent_id = a.agent_id";
+          <ul class="blog-list">
+
+         
+
+
+
+            <?php
+
+            // Retrieve the agent ID from the session
+$agentId = $_SESSION['agent_id'];
+$agentName = $_SESSION['agent_name'];
+
+
+// Query to retrieve videos for the logged-in agent
+$sql = "SELECT id, name_video, coins FROM videos WHERE agent_id = '$agentId'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $videoId = $row['id'];
-    $videoName = $row['name_video'];
-    $videoCoins = $row['coins'];
-    $agentName = $row['agent_name'];
-    $videoUrl = '../assets/videos/' . $videoName; // Assuming the name in the database includes the extension
+    while ($row = $result->fetch_assoc()) {
+        $videoId = $row['id'];
+        $videoName = $row['name_video'];
+        $videoCoins = $row['coins'];
+        $videoUrl = '../assets/videos/' . $videoName; // Assuming the name in the database includes the extension
 
-    // Display video in the specified format
-    echo '<li>';
-    echo '<div class="blog-card">';
-    echo '<figure class="card-banner video-holder" style="--width: 400; --height: 290;">';
-    echo '<video controls width="400" height="290" alt="' . $videoName . '" class="video-cover">';
-    echo '<source src="' . $videoUrl . '" type="video/mp4">';
-    echo 'Your browser does not support the video tag.';
-    echo '</video>';
-    echo '</figure>';
-    echo '<div class="card-content">';
-    echo '<ul class="card-meta-list">';
-    echo '<li class="card-meta-item">';
-    echo '<ion-icon name="person-outline"></ion-icon>';
-    echo '<a href="#" class="item-text">Agent: ' . $agentName . '</a>';
-    echo '</li>';
-    echo '<li class="card-meta-item">';
-    echo '<ion-icon name="calendar-outline"></ion-icon>';
-    echo '<time datetime="2024-01-28" class="item-text">January 28, 2024</time>';
-    echo '</li>';
-    echo '</ul>';
-     
-    echo '<a href="#" class="card-link">';
-    echo '<span class="span"> Price </span>';
-    echo '<span class="span">' . $videoCoins . '</span>';
-    echo '<ion-icon name="caret-forward"></ion-icon>';
-    echo '</a>';
-    echo '</div>';
-    echo '</div>';
-    echo '</li>';
-  }
+        // Display video in the specified <form action=""></form>at
+        echo '<li>';
+        echo '<div class="blog-card">';
+        echo '<figure class="card-banner video-holder" style="--width: 400; --height: 290;">';
+        echo '<video controls width="400" height="290" alt="' . $videoName . '" class="video-cover">';
+        echo '<source src="' . $videoUrl . '" type="video/mp4">';
+        echo 'Your browser does not support the video tag.';
+        echo '</video>';
+        echo '</figure>';
+        echo '<div class="card-content">';
+        echo '<ul class="card-meta-list">';
+        echo '<li class="card-meta-item">';
+        echo '<ion-icon name="person-outline"></ion-icon>';
+        echo '<a href="#" class="item-text">Agent</a>';
+        echo '</li>';
+        echo '<li class="card-meta-item">';
+        echo '<ion-icon name="calendar-outline"></ion-icon>';
+        echo '<time datetime="2024-01-28" class="item-text">January 28, 2024</time>';
+        echo '</li>';
+        echo '</ul>';
+        echo '<h3><a href="#" class="card-title">' . $agentName . '</a></h3>';
+         
+        echo '<a href="#" class="card-link">';
+        echo '<span class="span"> Price </span>';
+        echo '<span class="span">'. $videoCoins .'</span>';
+        echo '<ion-icon name="caret-forward"></ion-icon>';
+        echo '</a>';
+        echo '</div>';
+        echo '</div>';
+        echo '</li>';
+    }
 } else {
-  echo 'No videos found.';
-}
+    echo 'No videos found for this agent.';
+} 
 ?>
+
 
 
             </section>
