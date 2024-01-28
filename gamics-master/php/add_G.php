@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if an image is selected
     if ($picture['error'] == 0) {
         // Specify the target directory to upload the image
-        $targetDir = "C:/xampp/htdocs/GameHarbor/GameHarbor/gamics-master/assets/images/games/";
+        $targetDir = "gamics-master/assets/images/games";
 
         // Generate a unique filename for the uploaded image
         
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $targetFile = $targetDir . basename($picture['name']);
 
         // Move the uploaded file to the target directory
-        if (move_uploaded_file($picture['tmp_name'], $targetFile)) {
+       // if (move_uploaded_file($picture['tmp_name'], $targetFile)) {
             // Image uploaded successfully
 
             // TODO: Perform database insertion with other form data and $targetFile as the image filename
@@ -61,5 +61,5 @@ $targetFile = $targetDir . basename($picture['name']);
 
     // Close the database connection
    
-}
+//}
 ?>
