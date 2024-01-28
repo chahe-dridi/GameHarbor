@@ -249,7 +249,10 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
  
 
 
-
+      <section class="account-balance-section">
+    <h2>Account Balance</h2>
+    <div id="account-balance"></div>
+</section>
      
       <form method="post" action="update_profile.php">
     <div class="input-group">
@@ -265,7 +268,7 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
     <div class="input-group">
         <label for="country">Country:</label>
         <select id="country" name="country" required>
-            <option value="" disabled>Select your new country</option>
+            <option value="" enabled>Select your new country</option>
             <!-- Populate the country dropdown with fetched data -->
             <?php
             $selectedCountry = $userData['country'];
