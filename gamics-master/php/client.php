@@ -167,6 +167,12 @@ $conn->close();
             <span class="cart-badge">0</span>
           </button>
 
+          <a href="#" aria-label="cart"  class="cart-btn"   >
+        <img src="../assets/images/rsz1_coin.png"   >
+              <span class="cart-badge">1</span>
+        </a>
+
+
           <button class="search-btn" aria-label="open search" data-search-toggler>
             <ion-icon name="search-outline"></ion-icon>
           </button>
@@ -318,8 +324,15 @@ $conn->close();
               <button class="play-btn" aria-label="play video">
                 <ion-icon name="play"></ion-icon>
               </button>
-
+ 
             </figure>
+
+            <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+            <a href="watch.php"  >
+              <button class="btn skewBg">Watch to Earn</button>
+            </a>
+          </div>
+
 
             <div class="live-match-player">
 
@@ -344,6 +357,7 @@ $conn->close();
             </div>
 
           </div>
+          
         </section>
 
       </div>
@@ -632,7 +646,7 @@ Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valu
                     <li class="card-meta-item">
                       <ion-icon name="calendar-outline"></ion-icon>
 
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
+                      <time datetime="2024-01-28" class="item-text">january 28, 2024</time>
                     </li>
 
                   </ul>
@@ -674,7 +688,7 @@ Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valu
                     <li class="card-meta-item">
                       <ion-icon name="calendar-outline"></ion-icon>
 
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
+                      <time datetime="2024-01-28" class="item-text">january 28, 2024</time>
                     </li>
 
                   </ul>
@@ -716,7 +730,7 @@ Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valu
                     <li class="card-meta-item">
                       <ion-icon name="calendar-outline"></ion-icon>
 
-                      <time datetime="2022-09-19" class="item-text">September 19, 2022</time>
+                      <time datetime="2024-01-28" class="item-text">january 28, 2024</time>
                     </li>
 
                   </ul>
@@ -954,7 +968,7 @@ Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valu
       <div class="container">
 
         <p class="copyright">
-          &copy; 2022 Gamics. All Right Reserved by <a href="#" class="copyright-link">GameHarbor</a>
+          &copy; 2024 Gamics. All Right Reserved by <a href="#" class="copyright-link">GameHarbor</a>
         </p>
 
         

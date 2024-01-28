@@ -10,23 +10,7 @@ if (!isset($_SESSION['client_id'])) {
     header("Location: login.php");
     exit();
 }
-
-// Function to get user data by ID
-function getUserDataById($client_id, $conn) {
-    // Perform a query to get user data based on the client_id
-    $sql = "SELECT client_id, client_name, email, country FROM clients WHERE client_id = $client_id";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        return $result->fetch_assoc();
-    } else {
-        return false;
-    }
-}
-
-// Get user data
-$userData = getUserDataById($_SESSION['client_id'], $conn);
-?>
+ ?>
 
 
 <!DOCTYPE html>
@@ -149,7 +133,7 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
             </li>
 
             <li class="navbar-item">
-                 <a href="logout.php" class="navbar-link skewBg" data-nav-link>Log out</a>
+              <a href="profile.php" class="navbar-link skewBg" data-nav-link>Profile</a>
             </li>
             
           </ul>
@@ -259,54 +243,7 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
       <section class="account-balance-section">
     <h2>Account Balance</h2>
     <div id="account-balance"></div>
-</section>
-     
-      <form method="post" action="update_profile.php">
-    <div class="input-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your new username" value="<?php echo $userData['client_name']; ?>" required>
-    </div>
-
-    <div class="input-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your new email" value="<?php echo $userData['email']; ?>" required>
-    </div>
-
-    <div class="input-group">
-        <label for="country">Country:</label>
-        <select id="country" name="country" required>
-            <option value="" enabled>Select your new country</option>
-            <!-- Populate the country dropdown with fetched data -->
-            <?php
-            $selectedCountry = $userData['country'];
-            // Fetch countries from an API (example: Restcountries API)
-            $countriesApiUrl = 'https://restcountries.com/v2/all';
-            $countriesData = json_decode(file_get_contents($countriesApiUrl), true);
-
-            foreach ($countriesData as $country) {
-                $optionValue = $country['name'];
-                $selected = ($optionValue == $selectedCountry) ? 'selected' : '';
-                echo "<option value=\"$optionValue\" $selected>$optionValue</option>";
-            }
-            ?>
-        </select>
-    </div>
-
-    <!-- You can choose to omit the password fields if not updating the password -->
-    <div class="input-group">
-        <label for="password">New Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your new password">
-    </div>
-
-    <div class="input-group">
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your new password">
-    </div>
-
-    <!-- Update button type to submit -->
-    <button class="signup-btn" type="submit">Update Profile</button>
-</form>
-
+ 
 
 
 
@@ -355,6 +292,75 @@ $userData = getUserDataById($_SESSION['client_id'], $conn);
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+
+  <section class="section blog" id="blog" aria-label="blog">
+        <div class="container">
+
+          <h2 class="h2 section-title">
+            Latest videos   <span class="span"> </span>
+          </h2>
+
+          <p class="section-text">
+            
+Unlock exclusive rewards by paying attention to videos on GAME HARBOR. Gain valuable points as you watch, and enhance your gaming experience with exciting benefits.
+          </p>
+
+          <ul class="blog-list">
+
+            <li>
+              <div class="blog-card">
+
+                <figure class="card-banner img-holder" style="--width: 400; --height: 290;">
+                  <img src="../assets/images/blog-1.jpg" width="400" height="290" loading="lazy"
+                    alt="Shooter Action Video" class="img-cover">
+                </figure>
+
+                <div class="card-content">
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <ion-icon name="person-outline"></ion-icon>
+
+                      <a href="#" class="item-text">Admin</a>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <ion-icon name="calendar-outline"></ion-icon>
+
+                      <time datetime="2024-01-28" class="item-text">january 28, 2024</time>
+                    </li>
+
+                  </ul>
+
+                  <h3>
+                    <a href="#" class="card-title">Shooter Action Video</a>
+                  </h3>
+
+                  
+                  <a href="#" class="card-link">
+                    <span class="span">Read More</span>
+
+                    <ion-icon name="caret-forward"></ion-icon>
+                  </a>
+
+                </div>
+
+              </div>
+            </li>   
+
+
+
+
+
+
+            </section>
+
+
+
 
 </body>
 
