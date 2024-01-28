@@ -9,9 +9,7 @@ async function handleVideoWatch() {
 
     // Create a Hedera client instance (replace with your actual configuration)
     const client = Client.forTestnet(); // Assuming you're using the testnet
-
     
-
     // Perform the transaction to pay for watching the video:
     const sendHbar = await new TransferTransaction()
       .addHbarTransfer(myAccountId, Hbar.fromTinybars(1)) // Adjust amount as needed

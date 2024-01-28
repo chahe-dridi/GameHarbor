@@ -9,7 +9,7 @@ buyButton.addEventListener("click", () => {
         // Create the transfer transaction
         const sendHbar = await new TransferTransaction()
           .addHbarTransfer(myAccountId, Hbar.fromTinybars(-gamePrice))
-          .addHbarTransfer(0.0.7714204, Hbar.fromTinybars(gamePrice))
+          .addHbarTransfer(myAccountId, Hbar.fromTinybars(gamePrice))
           .execute(client);
     
           alert("Thank you for your purchase!");
